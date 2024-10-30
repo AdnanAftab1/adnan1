@@ -43,7 +43,7 @@ function Listed(){
 
   function gotit(value,  index){
     return (
-      <div className=" relative inline-flex shadow-md m-3 rounded-md overflow-hidden" key={paro++}>
+      <div className=" relative w-full inline-flex shadow-md m-3 rounded-md overflow-hidden" key={paro++}>
     <img src={value.image} className="size-48"/>
     <div className="m-2.5"><div className="inline-flex"><img width="12" height="6" src="https://img.icons8.com/color/48/marker--v1.png" alt="marker--v1"/><p className="text-xs font-bold text-gray-800">{value.Location}</p> <a href="https://www.google.com" className="underline text-xs font-light text-gray-800 px-2">View on Maps</a></div>
      <h1 className="font-bold text-2xl">{value.Name}</h1>
@@ -70,7 +70,7 @@ useEffect(()=>{
       Description:document.getElementById('Description').value,
       dates:document.getElementById('From-To').value,
       image:document.getElementById('Image').value,
-    }
+    } 
     newItem(prevItems => [...prevItems, temp]);
   }
   const butt=document.getElementById("Butt");
