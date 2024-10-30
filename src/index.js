@@ -34,18 +34,27 @@ function Listed(){
 
 ])
   for (let index = 0; index < itemz.length; index++) {
-    const element = gotit(itemz[index]);
+    itemz[index]={...itemz[index],
+      id:index
+    }
+    const element = gotit(itemz[index],index);
     items1.push(element);
   }
-  function gotit(value){
+
+  function gotit(value,  index){
     return (
-      <div className=" relative inline-flex shadow-md m-2 rounded-md overflow-hidden" key={paro++}>
+      <div className=" relative inline-flex shadow-md m-3 rounded-md overflow-hidden" key={paro++}>
     <img src={value.image} className="size-48"/>
     <div className="m-2.5"><div className="inline-flex"><img width="12" height="6" src="https://img.icons8.com/color/48/marker--v1.png" alt="marker--v1"/><p className="text-xs font-bold text-gray-800">{value.Location}</p> <a href="https://www.google.com" className="underline text-xs font-light text-gray-800 px-2">View on Maps</a></div>
      <h1 className="font-bold text-2xl">{value.Name}</h1>
      <p className="text-sm font-bold">{value.dates}</p>
      <p className="leading-4 font-light font-sans">{value.Description}</p>
-     <button className='absolute top-0 right-1' onClick={remover}><img src="https://img.icons8.com/color/512/delete-sign.png" className='size-10' /></button>
+     <button className='absolute top-0 right-1' onClick={
+      ()=>{
+      newItem(prevItems=>prevItems.filter((curvalue)=> {return index!==curvalue.id } )) 
+      }
+      }>
+     <img src="https://img.icons8.com/color/512/delete-sign.png" className='size-10' /></button>
         </div>
   </div>
   );
@@ -55,6 +64,7 @@ function adder()
 {
   
   let temp={
+    id:itemz.length,
     Name:document.getElementById('Name').value,
     Location:document.getElementById('Location').value,
     Description:document.getElementById('Description').value,
@@ -63,10 +73,6 @@ function adder()
   }
   newItem(prevItems => [...prevItems, temp]);
 }
-  function remover(k)
-  {
-    newItem(prevItems=>prevItems.splice(k,1));
-  }
 return items1;
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
