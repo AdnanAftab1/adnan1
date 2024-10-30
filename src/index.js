@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -59,22 +59,30 @@ function Listed(){
   </div>
   );
 }
-document.getElementById("Butt").addEventListener("click",adder)
-function adder()
-{
+
+useEffect(()=>{
+  const handleClick=()=>{
   
-  let temp={
-    id:itemz.length,
-    Name:document.getElementById('Name').value,
-    Location:document.getElementById('Location').value,
-    Description:document.getElementById('Description').value,
-    dates:document.getElementById('From-To').value,
-    image:document.getElementById('Image').value,
+    let temp={
+      id:itemz.length,
+      Name:document.getElementById('Name').value,
+      Location:document.getElementById('Location').value,
+      Description:document.getElementById('Description').value,
+      dates:document.getElementById('From-To').value,
+      image:document.getElementById('Image').value,
+    }
+    newItem(prevItems => [...prevItems, temp]);
   }
-  newItem(prevItems => [...prevItems, temp]);
+  const butt=document.getElementById("Butt");
+  butt.addEventListener("click",handleClick);
+  return ()=>{
+    butt.removeEventListener("click",handleClick);
+  }
+ 
+  },[itemz]);
+  return items1;
 }
-return items1;
-}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
